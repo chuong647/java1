@@ -1,0 +1,65 @@
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HelloController {
+ 
+	@RequestMapping("/hello/message")
+	@ResponseBody
+	public String helloStringMessage() {
+		return "Hello [Nguyễn Hoàng Hải] - [IT16305]";
+	}
+	
+	@RequestMapping("/hello/view")	
+	@ResponseBody
+	public String helloStringView() {
+		return "hello";
+	}
+	
+	@GetMapping("/hello/viewGet")
+	@ResponseBody
+	public String helloStringViewGet() {
+		return "hello";
+	}
+	
+	@PostMapping("/hello/viewPost")	
+	@ResponseBody
+	public String helloStringViewPost() {
+		return "hello";
+	}
+	
+	@RequestMapping("/hello/{name}")
+	@ResponseBody
+	public String helloPathVariable(@PathVariable String name) {
+		return "Hi " + name;
+	}
+	
+	@RequestMapping("/hello")
+	@ResponseBody
+	public String helloRequestParam(@RequestParam(name="ten", required = false) String giaTri) {
+		if(giaTri==null || "".equals(giaTri)) {
+			giaTri = "Spring";
+		}	
+		return "Hi " + giaTri;
+	}
+	
+	@RequestMapping("/hello/forward")	
+	@ResponseBody
+	public String helloForward() {
+		return "forward:about.html";
+	}
+	
+	@RequestMapping("/hello/redirect")	
+	@ResponseBody
+	public String helloRedirect() {
+		return "redirect:hello/view";
+	}
+	
+}
